@@ -20,5 +20,5 @@ ENV NODE_OPTIONS=--openssl-legacy-provider
 RUN npm run build
 
 # Expose port and run application
-EXPOSE 5003
+EXPOSE 8003
 CMD ["npm", "start"]
