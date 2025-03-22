@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "kowsika12/react"
+        IMAGE_NAME = "guna1311/devfinal"
         CONTAINER_NAME = "devops-react-app"
         PORT = "5003"
     }
@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/kowsika-arumugamm/devops-react.git'
+                git 'https://github.com/guna-dhamothiran/devops_finalproject.git'
             }
         }
 
