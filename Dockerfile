@@ -1,29 +1,24 @@
-# Use Node.js image for building the React app
-FROM node:18 AS build
+# Dockerfile
+FROM node:18
 
-# Set working directory in container
+# Set working directory
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy all source files
+# Copy all project files
 COPY . .
 
-# Build the React app
+# ✅ Use OpenSSL Legacy Provider to fix build issues
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# Build the application
 RUN npm run build
 
-# Use Nginx for serving the build files
-FROM nginx:latest
-
-# Copy built files from previous step to Nginx HTML directory
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Expose port 5003
+# Expose port and run application
 EXPOSE 5003
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "start"]
